@@ -27,15 +27,25 @@
                         <div class="card-header">
                           <div class="card-title mb-2">Detailed Information</div>
                           <div style="float:right;">
-                            <button
-                              v-if="mode=='customer'"
+                            <button v-if="$store.state.role!='operator' && mode=='customer'"
                               @click="gotoPayment()"
                               class="btn btn-primary"
                             >
                               <i class="feather icon-dollar-sign"></i>Add Payment
                             </button>
-                            <button
-                              v-if="mode=='customer'"
+                            <button disabled v-if="$store.state.role=='operator' && mode=='customer'"
+                              @click="gotoPayment()"
+                              class="btn btn-primary"
+                            >
+                              <i class="feather icon-dollar-sign"></i>Add Payment
+                            </button>
+                            <button v-if="$store.state.role!='operator' && mode=='customer'"
+                              @click="gotoInvoice()"
+                              class="btn btn-primary"
+                            >
+                              <i class="feather icon-file"></i> Generate Invoice
+                            </button>
+                            <button disabled v-if="$store.state.role=='operator' && mode=='customer'"
                               @click="gotoInvoice()"
                               class="btn btn-primary"
                             >
