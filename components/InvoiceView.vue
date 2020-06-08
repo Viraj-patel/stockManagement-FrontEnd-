@@ -22,8 +22,8 @@
           <div class="col-sm-6 col-12 text-right">
             <h1>Invoice</h1>
             <div class="invoice-details mt-2">
-              <h6>INVOICE NO.</h6>
-              <p>001/2019</p>
+              <!-- <h6>INVOICE NO.</h6>
+              <p>001/2019</p>-->
               <h6 class="mt-2">INVOICE DATE</h6>
               <p>{{ invoiceDate | filterDateFormat }}</p>
             </div>
@@ -53,14 +53,16 @@
           <div class="col-sm-6 col-12 text-right">
             <h5>Vardhmaan Xerox</h5>
             <div class="company-info my-2">
-              <p>9 N. Sherwood Court</p>
-              <p>Elyria, OH</p>
-              <p>94203</p>
+              <p>{{ branch.branchName }} Branch</p>
+              <p>{{branch.branchAddress}}</p>
+              <p
+                v-if="branch.gstNumber!=null || branch.gstNumber!=undefined || branch.gstNumber!=''"
+              >GST No. {{branch.gstNumber}}</p>
             </div>
             <div class="company-contact">
               <p>
                 <i class="feather icon-phone"></i>
-                +91 999 999 9999
+                {{branch.branchPhoneNo}}
               </p>
             </div>
           </div>
@@ -212,6 +214,10 @@ export default {
       required: false
     },
     customer: {
+      type: Object,
+      required: true
+    },
+    branch: {
       type: Object,
       required: true
     },
